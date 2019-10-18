@@ -38,3 +38,19 @@ export const createTeam = (data) => dispatch => {
     })
     .catch(console.error)
 }
+
+export const FETCH_TEAM_SUCCESS = 'FETCH_TEAM_SUCCESS'
+
+const fetchTeamSuccess = team => ({
+    type: FETCH_TEAM_SUCCESS,
+    payload: team
+})
+
+export const loadTeam = (id) => (dispatch, getState) => {
+    console.log('CAN WE GET THE STATE??', getState())
+    request(`${baseUrl}/teams/${id}`)
+        .then(response => {
+            console.log(response)
+            dispatch(fetchTeamSuccess(response.body))
+        })
+}
