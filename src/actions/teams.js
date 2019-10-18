@@ -21,3 +21,20 @@ export const loadTeams = () => (dispatch, getState) => {
     })
     .catch(console.error)
 }
+
+export const TEAM_CREATE_SUCCESS = 'TEAM_CREATE_SUCCESS'
+
+const teamCreateSuccess = team => ({
+  type: TEAM_CREATE_SUCCESS,
+  payload: team
+})
+
+export const createTeam = (data) => dispatch => {
+  request
+    .post(`${baseUrl}/teams`)
+    .send(data)
+    .then(response => {
+      dispatch(teamCreateSuccess(response.body))
+    })
+    .catch(console.error)
+}
