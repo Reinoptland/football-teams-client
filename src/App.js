@@ -1,27 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import store from './store'
+import { Provider } from 'react-redux'
+import { Route, Link } from 'react-router-dom'
+import Home from './components/Home'
+import TeamListContainer from './components/TeamListContainer'
+
 
 class App extends Component {
-  state = {
-    teams: null
-  }
-  componentDidMount(){
-    fetch('http://localhost:4000/teams?hello=world')
-      .then(response => response.json())
-      // .then(teams => console.log('TEAMS:', teams))
-      .then(teams => this.setState({ teams }))
-  }
-  
-  render(){
+  render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          { this.state.teams && this.state.teams.map(team => <h1>{team.name}</h1>)}
-        </header>
-      </div>
+      <Provider store={store}>
+        <div>
+          <Link to='/'> Home </Link>
+          <Link to='/teams'> Teams </Link>
+          <Route path="/" exact component={Home} />
+          <Route path="/teams" component={TeamListContainer} />
+        </div>
+      </Provider>
     );
   }
 }
 
-export default App;
+export default App
