@@ -1,20 +1,23 @@
-import React from 'react'
-import TeamDetails from './TeamDetails'
-import { connect } from 'react-redux'
-import { loadTeam } from '../actions/teams'
+import React from "react";
+import TeamDetails from "./TeamDetails";
+import { connect } from "react-redux";
+import { loadTeam } from "../actions/teams";
 
 class TeamDetailsContainer extends React.Component {
-    componentDidMount(){
-        this.props.loadTeam(Number(this.props.match.params.id))
-    }
-    render(){
-        console.log(this.props.team)
-        return <TeamDetails team={this.props.team}/>
-    }
+  componentDidMount() {
+    this.props.loadTeam(Number(this.props.match.params.id));
+  }
+  render() {
+    console.log(this.props.team);
+    return <TeamDetails team={this.props.team} />;
+  }
 }
 
-const mapStateToProps = (state) => ({
-    team: state.team
-})
+const mapStateToProps = state => ({
+  team: state.team
+});
 
-export default connect(mapStateToProps, { loadTeam })(TeamDetailsContainer)
+export default connect(
+  mapStateToProps,
+  { loadTeam }
+)(TeamDetailsContainer);
