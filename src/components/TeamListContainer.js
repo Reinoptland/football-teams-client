@@ -3,6 +3,7 @@ import { loadTeams } from "../actions/teams";
 import { connect } from "react-redux";
 import TeamsList from "./TeamsList";
 import CreateTeamFormContainer from "./CreatTeamFormContainer";
+import { Link } from "react-router-dom";
 
 class TeamsListContainer extends React.Component {
   componentDidMount() {
@@ -14,7 +15,11 @@ class TeamsListContainer extends React.Component {
     return (
       <div>
         <TeamsList teams={this.props.teams} />
-        <CreateTeamFormContainer />
+        {this.props.loggedIn ? (
+          <CreateTeamFormContainer />
+        ) : (
+          <Link to="/login">Please log in to create teams</Link>
+        )}
       </div>
     );
   }
@@ -23,7 +28,8 @@ class TeamsListContainer extends React.Component {
 const mapStateToProps = state => {
   console.log(state); // check what the state is
   return {
-    teams: state.teams // check react devtools, if the component has props.teams
+    teams: state.teams, // check react devtools, if the component has props.teams
+    loggedIn: state.auth !== null
   };
 };
 

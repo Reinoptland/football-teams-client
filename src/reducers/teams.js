@@ -10,6 +10,9 @@ export default (state = [], action = {}) => {
     case TEAM_CREATE_SUCCESS:
       return [...state, { ...action.payload }];
 
+    // case 'DELETE_TEAM'
+    //   return state.filter() // filter out the team that you deleted
+
     default:
       return state;
   }

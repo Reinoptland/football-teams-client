@@ -40,9 +40,12 @@ const teamCreateSuccess = team => ({
   payload: team
 });
 
-export const createTeam = data => dispatch => {
+export const createTeam = data => (dispatch, getState) => {
+  const token = getState().auth;
+
   request
     .post(`${baseUrl}/teams`)
+    .set("Authorization", `Bearer ${token}`)
     .send(data)
     .then(response => {
       dispatch(teamCreateSuccess(response.body));
